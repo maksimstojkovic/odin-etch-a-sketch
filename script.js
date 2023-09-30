@@ -1,16 +1,15 @@
 function resetGrid() {
   const modal = document.querySelector('#reset-modal');
-  const rows = parseInt(modal.querySelector('#modal-row-count').value);
-  const cols = parseInt(modal.querySelector('#modal-column-count').value);
+  const sideCount = parseInt(modal.querySelector('#modal-side-count').value);
   
-  modal.close();
   
-  if (!Number.isFinite(rows) || !Number.isFinite(cols) ||
-      rows < 1 || cols < 1) {
-    return;
+  if (!Number.isFinite(sideCount) || sideCount < 1 || sideCount > 100) {
+    return false;
   }
 
-  generateGrid(rows, cols);
+  modal.close();
+  generateGrid(sideCount, sideCount);
+  return true;
 }
 
 function generateGrid(rows = 16, cols = 16) {
@@ -29,7 +28,7 @@ function generateGrid(rows = 16, cols = 16) {
       
       cell.addEventListener('mouseenter', (e) => {
         const cell = e.target;
-        cell.style.backgroundColor = 'black';
+        cell.style.backgroundColor = 'white';
       });
       
       row.appendChild(cell);
@@ -40,12 +39,14 @@ function generateGrid(rows = 16, cols = 16) {
 function init() {
   const resetButton = document.querySelector('#reset-button');
   const modal = document.querySelector('#reset-modal');
-  const submitButton = document.querySelector('#modal-submit');
+  const form = document.querySelector('#reset-form');
+  // const submitButton = document.querySelector('#modal-submit');
   const cancelButton = document.querySelector('#modal-cancel');
 
   // Add modal button events
   resetButton.addEventListener('click', () => modal.showModal());
-  submitButton.addEventListener('click', resetGrid);
+  form.addEventListener('submit', resetGrid);
+  // cancelButton.addEventListener('click', () => resetGrid());
   cancelButton.addEventListener('click', () => modal.close());
   
   generateGrid();
