@@ -7,7 +7,31 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="menu">
+    <button id="reset-button">Reset Grid</button>
+  </div>
+
   <div id="grid"></div>
+
+  <dialog id="reset-modal">
+    <h3>Reset Grid?</h3>
+    <p>Enter the number of rows and columns for the new grid.</p>
+    
+    <div class="input">
+      <p>Rows:</p>
+      <input type="number" name="row-count" id="modal-row-count" value="16">
+    </div>
+
+    <div class="input">
+      <p>Columns:</p>
+      <input type="number" name="column-count" id="modal-column-count" value="16">
+    </div>
+
+    <div class="buttons">
+      <button id="modal-submit">Reset</button>
+      <button id="modal-cancel">Cancel</button>
+    </div>
+  </dialog>
 
   <script src="script.js"></script>
 </body>
